@@ -2,10 +2,10 @@ package question1;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 public class IHMTestEnsemble extends JFrame {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private JPanel panel1;
     private JLabel label1;
     private JTextField textField1;
@@ -64,27 +64,29 @@ public class IHMTestEnsemble extends JFrame {
         panel3.setLayout(new java.awt.FlowLayout(0, 5, 5));
         panel3.setBackground(java.awt.Color.green);
         label4 = new JLabel();
-        label4.setText("Opérations e1 Op e2  :");
+        label4.setText("Opé?rations e1 Op e2  :");
         label4.setName("label4");
         panel3.add(label4);
 
         button1 = new JButton("union");
         button1.setBackground(java.awt.Color.red);
         button1.setName("union");
-        button1.addActionListener(null  // à compléter, par une instance de
-                                        // classe anonyme, usage de
-                                        // unionActionPerformed voir en bas de
-                                        // page
+        button1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                unionActionPerformed(e);
+            }
+        }
         );
 
         panel3.add(button1);
         button2 = new JButton("intersection");
         button2.setBackground(java.awt.Color.yellow);
         button2.setName("intersection");
-        button2.addActionListener(null  // à compléter, par une instance de
-                                        // classe anonyme,
-                                        // intersectionActionPerformed voir en
-                                        // bas de page
+        button2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                intersectionActionPerformed(e);
+            }
+        }
         );
 
         panel3.add(button2);
@@ -92,20 +94,22 @@ public class IHMTestEnsemble extends JFrame {
         button3.setBackground(java.awt.Color.pink);
         button3.setActionCommand("difference");
         button3.setName("difference");
-        button3.addActionListener(null  // à compléter, par une instance de
-                                        // classe anonyme, usage de
-                                        // differenceActionPerformed voir en bas
-                                        // de page
+        button3.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                differenceActionPerformed(e);
+            }
+        }
         );
 
         panel3.add(button3);
         button4 = new JButton("diffSymetrique");
         button4.setBackground(java.awt.Color.cyan);
         button4.setName("diffSymetrique");
-        button4.addActionListener(null  // à compléter, par une instance de
-                                        // classe anonyme, usgae de
-                                        // diffSymetriqueActionPerformed voir en
-                                        // bas de page
+        button4.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                diffSymetriqueActionPerformed(e);
+            }
+        }
         );
 
         panel3.add(button4);
@@ -114,8 +118,8 @@ public class IHMTestEnsemble extends JFrame {
         panel4 = new JPanel();
         panel4.setLayout(new java.awt.FlowLayout(0, 5, 5));
         label3 = new JLabel();
-        label3.setText("Résultat");
-        label3.setName("Résultat");
+        label3.setText("Ré?sultat");
+        label3.setName("Ré?sultat");
 
         panel4.add(label3);
 
@@ -130,8 +134,7 @@ public class IHMTestEnsemble extends JFrame {
 
     private Ensemble<String> getSet(JTextField saisie) {
         Ensemble<String> e = new Ensemble<String>();
-        java.util.StringTokenizer st = new java.util.StringTokenizer(
-                saisie.getText(), " ,.:/-;");
+        java.util.StringTokenizer st = new java.util.StringTokenizer(saisie.getText(), " ,.:/-;");
         while (st.hasMoreTokens()) {
             e.add(st.nextToken());
         }
@@ -140,14 +143,12 @@ public class IHMTestEnsemble extends JFrame {
 
     // ne pas modifier ces lignes
     private void differenceActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_differenceActionPerformed
-        // Add your handling code here:
         Ensemble<String> e1 = getSet(textField1);
         Ensemble<String> e2 = getSet(textField2);
         textField3.setText(e1.diff(e2).toString());
     }// GEN-LAST:event_differenceActionPerformed
 
     private void intersectionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_intersectionActionPerformed
-        // Add your handling code here:
         Ensemble<String> e1 = getSet(textField1);
         Ensemble<String> e2 = getSet(textField2);
         textField3.setText((e1.inter(e2)).toString());
@@ -160,7 +161,6 @@ public class IHMTestEnsemble extends JFrame {
     }// GEN-LAST:event_unionActionPerformed
 
     private void diffSymetriqueActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_button4ActionPerformed
-        // Add your handling code here:
         Ensemble<String> e1 = getSet(textField1);
         Ensemble<String> e2 = getSet(textField2);
         textField3.setText(e1.diffSym(e2).toString());
